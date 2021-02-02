@@ -21,14 +21,20 @@ formatDuration <- function(durationSecs,padded=FALSE){
 # Loop progress reporter ----
 reportLoop <- function(x,max,label=NA,reportInterval=5){
 	resetTrackers <- function(){
-		reportLoopTracker <<- x
-		reportLoopTimeStart <<- Sys.time()
+		.GlobalEnv$reportLoopTracker <- x
+		.GlobalEnv$reportLoopTimeStart <- Sys.time()
 	}
-	if(!"reportLoopTracker"%in%ls(envir=.GlobalEnv)){
+	tryCatch(
+		{
+			reportLoopTracker
+			reportLoopTimeStart
+		},
+		error=function(x){
+			resetTrackers()
+		}
+	)
+	if(reportLoopTracker>x)
 		resetTrackers()
-	}else if(reportLoopTracker>x){
-		resetTrackers()
-	}
 	progPct <- round(x/max*100,2)
 	progPct <- sprintf("%.2f",progPct)
 	targetWidth <- 6
