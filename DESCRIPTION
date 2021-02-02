@@ -1,0 +1,10 @@
+Package: durationTools
+Type: Package
+Title: Simple tools for interfacing with durations
+Version: 1.0
+Author: Jon Dayley
+Maintainer: Jon Dayley <jonathandayley@gmail.com>
+Description: Two handy tools: one for formatting durations and one for reporting loop progress.
+License: CC0
+Encoding: UTF-8
+LazyData: true
