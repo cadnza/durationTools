@@ -1,5 +1,7 @@
 # Duration formatter ----
 formatDuration <- function(durationSecs,padded=FALSE){
+	if(durationSecs<0)
+		stop("Please provide a non-negative value for durationSecs.")
 	durationSecs <- as.difftime(durationSecs,units="secs")
 	hrs <- floor(as.numeric(durationSecs,units="hours"))
 	mins <- floor(as.numeric(durationSecs,units="mins")%%60)
@@ -12,7 +14,7 @@ formatDuration <- function(durationSecs,padded=FALSE){
 			tFormatted
 		)
 	}
-	tFormatted <- gsub("(?<!\\d)0(h|m|s)","  ",tFormatted,perl=TRUE)
+	tFormatted <- gsub("(?<!\\d)0(h|m)","  ",tFormatted,perl=TRUE)
 	if(!padded)
 		tFormatted <- trimws(gsub(" +"," ",tFormatted))
 	return(tFormatted)
