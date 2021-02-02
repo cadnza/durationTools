@@ -8,7 +8,7 @@ formatDuration <- function(durationSecs,padded=FALSE){
 	if(padded){
 		tFormatted <- gsub(" (?=\\d(m|s))","  ",tFormatted,perl=TRUE)
 		tFormatted <- paste0(
-			paste(rep(" ",2-nchar(stringr::str_match(tFormatted,"\\d+(?=h)")[1,1])),collapse=""),
+			paste(rep(" ",max(2-nchar(stringr::str_match(tFormatted,"\\d+(?=h)")[1,1]),0)),collapse=""),
 			tFormatted
 		)
 	}

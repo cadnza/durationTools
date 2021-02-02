@@ -13,7 +13,7 @@ formatDuration(durationSecs,padded=FALSE)
     The duration in seconds.
   }
   \item{padded}{
-    Whether you want the duration padded. If you do, it adds space such that all durations occupy the same width (provided less than 100 hours for now... I'll fix it.).
+    Whether you want the duration padded. If you do, it adds space such that all durations occupy the same width (provided less than 100 hours).
   }
 }
 \details{
