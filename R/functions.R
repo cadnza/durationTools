@@ -1,6 +1,7 @@
 # Duration formatter ----
 formatDuration <- function(durationSecs,padded=FALSE){
-	isZero <- round(durationSecs)==0
+	durationSecs <- round(durationSecs)
+	isZero <- durationSecs==0
 	if(durationSecs<0)
 		stop("Please provide a non-negative value for durationSecs.")
 	durationSecs <- as.difftime(durationSecs,units="secs")
