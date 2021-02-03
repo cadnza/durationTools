@@ -56,6 +56,7 @@ reportLoop <- function(x,max,label=NA,reportInterval=5){
 	tElapsed <- tNow-reportLoopTimeStart
 	tPer <- tElapsed/x
 	tProjected <- tPer*(max-x)
+	tProjected <- max(tProjected,0)
 	if(x%%reportInterval==0|x==max){
 		cat("\n")
 		cat(
