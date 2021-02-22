@@ -5,7 +5,15 @@
 \code{reportLoop} is a nicely packaged progress reporter for your loop. It doesn't require any initialization like \code{txtProgressBar} does; you just drop the thing into your loop and it goes to work. Admittedly it's not as pretty to look at, but there you go.
 }
 \usage{
-reportLoop(x,max,label=NA,reportInterval=5)
+reportLoop(
+	x,
+	max,
+	label=NA,
+	reportInterval=5,
+	maxWidth=80,
+	includePB=TRUE,
+	progressChar="="
+)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -20,6 +28,15 @@ reportLoop(x,max,label=NA,reportInterval=5)
   }
   \item{reportInterval}{
     The interval of iterations to report. For example, if \code{reportInterval} is 5 (default), you get a progress update every 5 iterations.
+  }
+  \item{maxWidth}{
+    The maximum width for a report; defaults to 80 characters. If this value is too short, reports will be truncated, so be sure you leave room.
+  }
+  \item{includePB}{
+    Whether to include a progress bar; defaults to \code{TRUE}.
+  }
+  \item{progressChar}{
+    The character to use for the progress bar; defaults to \code{=}. Ignored if \code{includePB} is \code{FALSE}.
   }
 }
 \details{
