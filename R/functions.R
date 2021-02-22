@@ -12,7 +12,13 @@ formatDuration <- function(durationSecs,padded=FALSE){
 	if(padded){
 		tFormatted <- gsub(" (?=\\d(m|s))","  ",tFormatted,perl=TRUE)
 		tFormatted <- paste0(
-			paste(rep(" ",max(2-nchar(stringr::str_match(tFormatted,"\\d+(?=h)")[1,1]),0)),collapse=""),
+			paste(
+				rep(
+					" ",
+					max(2-nchar(stringr::str_match(tFormatted,"\\d+(?=h)")[1,1]),0)
+				),
+				collapse=""
+			),
 			tFormatted
 		)
 	}
@@ -29,7 +35,14 @@ formatDuration <- function(durationSecs,padded=FALSE){
 }
 
 # Loop progress reporter ----
-reportLoop <- function(x,max,label=NA,reportInterval=5){
+reportLoop <- function(
+	x,
+	max,
+	label=NA,
+	reportInterval=5,
+	maxWidth=80,
+	progressChar="="
+){
 	resetTrackers <- function(){
 		.GlobalEnv$reportLoopTracker <- x
 		.GlobalEnv$reportLoopTimeStart <- Sys.time()
@@ -59,20 +72,50 @@ reportLoop <- function(x,max,label=NA,reportInterval=5){
 	tProjected <- tPer*(max-x)
 	if(x%%reportInterval==0|x==max){
 		cat("\n")
-		cat(
-			paste0(
-				ifelse(
-					is.na(label),
-					"",
-					paste0(label," ")
-				),
-				paste(
-					progPct,
-					paste(formatDuration(tProjected,padded=TRUE),"remaining"),
-					sep="  "
-				)
+		lineReport <- paste0(
+			ifelse(
+				is.na(label),
+				"",
+				paste0(label," ")
+			),
+			paste(
+				progPct,
+				paste(formatDuration(tProjected,padded=TRUE),"remaining"),
+				sep="  "
 			)
 		)
+		endChar <- "|"
+		nEndChars <- 2
+		minProgChars <- 4
+		minSpaces <- 1
+		maxSpaces <- 4
+		maxLengthForProg <- maxWidth-minProgChars-nEndChars-minSpaces
+		if(nchar(lineReport)<=maxLengthForProg){
+			lineReport <- paste0(
+				c(
+					lineReport,
+					rep(
+						" ",
+						min(
+							maxWidth-nchar(lineReport)-minProgChars-nEndChars,
+							maxSpaces
+						)
+					)
+				),
+				collapse=""
+			)
+			totalProgChars <- maxWidth-nchar(lineReport)-nEndChars
+			progs1 <- floor(totalProgChars*x/max)
+			progs0 <- totalProgChars-progs1
+			lineReport <- paste0(
+				lineReport,
+				endChar,
+				paste(rep(progressChar,progs1),collapse=""),
+				paste(rep(" ",progs0),collapse=""),
+				endChar
+			)
+		}
+		cat(lineReport)
 	}
 	if(x==max){
 		rm(reportLoopTracker,envir=.GlobalEnv)
