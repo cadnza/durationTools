@@ -41,6 +41,7 @@ reportLoop <- function(
 	label=NA,
 	reportInterval=5,
 	maxWidth=80,
+	includePB=TRUE,
 	progressChar="="
 ){
 	resetTrackers <- function(){
@@ -90,7 +91,7 @@ reportLoop <- function(
 		minSpaces <- 1
 		maxSpaces <- 4
 		maxLengthForProg <- maxWidth-minProgChars-nEndChars-minSpaces
-		if(nchar(lineReport)<=maxLengthForProg){
+		if(nchar(lineReport)<=maxLengthForProg&includePB){
 			lineReport <- paste0(
 				c(
 					lineReport,
@@ -115,6 +116,7 @@ reportLoop <- function(
 				endChar
 			)
 		}
+		lineReport <- substr(lineReport,1,maxWidth)
 		cat(lineReport)
 	}
 	if(x==max){
