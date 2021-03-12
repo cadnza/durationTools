@@ -57,7 +57,7 @@ By the way, a few quirks of the thing:
 %% ~put references to the literature/web site here ~
 }
 \author{
-\href{https://www.linkedin.com/in/jonathan-dayley-371398102}{Jonathan Dayley}
+\href{https://www.linkedin.com/in/jon-dayley-371398102/}{Jon Dayley}
 }
 \note{
 %%  ~~further notes~~
