@@ -72,7 +72,6 @@ reportLoop <- function(
 	tPer <- tElapsed/x
 	tProjected <- tPer*(max-x)
 	if(x%%reportInterval==0|x==max){
-		cat("\n")
 		lineReport <- paste0(
 			ifelse(
 				is.na(label),
@@ -117,7 +116,7 @@ reportLoop <- function(
 			)
 		}
 		lineReport <- substr(lineReport,1,maxWidth)
-		cat(lineReport)
+		message(lineReport)
 	}
 	if(x==max){
 		rm(reportLoopTracker,envir=.GlobalEnv)
