@@ -22,7 +22,7 @@ formatDuration(durationSecs,padded=FALSE)
 %% ~put references to the literature/web site here ~
 }
 \author{
-\href{https://www.linkedin.com/in/jon-dayley-371398102/}{Jon Dayley}
+\href{https://github.com/cadnza}{Jon Dayley}
 }
 \note{
 %%  ~~further notes~~
