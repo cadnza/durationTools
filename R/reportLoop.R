@@ -14,12 +14,15 @@ reportLoop <- function(
 	varPbMaxVal <- ".reportLoopDurationToolsMostRecentMaxValue"
 	# Remove progress bar and global trackers if current x is lower than previous
 	if(varPbMaxVal%in%la())
-		if(x<get(varPbMaxVal,envir=.GlobalEnv))
+		if(x<get(varPbMaxVal,envir=.GlobalEnv)){
 			if(varPbIdString%in%la()){
 				cli::cli_progress_done(id=varPbIdString)
 				rm(list=varPbIdString,envir=.GlobalEnv)
 				rm(list=varPbMaxVal,envir=.GlobalEnv)
+			}else{
+				cli::cli_progress_done()
 			}
+		}
 	# Assign x global tracker to current x
 	assign(varPbMaxVal,x,envir=.GlobalEnv)
 	# Set wait seconds
