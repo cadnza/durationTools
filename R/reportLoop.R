@@ -14,13 +14,15 @@ reportLoop <- function(
 			id=get(pbIdString,envir=.GlobalEnv)
 		)
 	)
+	if(is.na(label))
+		label=NULL
 	tryCatch(
 		eval(updatePB),
 		error=function(e){
 			assign(
 				pbIdString,
 				value=cli::cli_progress_bar(
-					name=ifelse(is.na(label),NULL,label),
+					name=label,
 					total=max,
 					type=ifelse(includePB,"iterator","tasks"),
 					auto_terminate=TRUE,
