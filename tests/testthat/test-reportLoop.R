@@ -14,5 +14,6 @@ test_that(
 			)
 			sleep(0.2)
 		}
+		testthat::expect_true(TRUE)
 	}
 )
