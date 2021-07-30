@@ -2,8 +2,8 @@
 reportLoop <- function(
 	x,
 	max,
-	waitSeconds=0,
 	label=NA,
+	waitSeconds=0,
 	includePB=TRUE
 ){
 	# Set function to get all variables from global environment
