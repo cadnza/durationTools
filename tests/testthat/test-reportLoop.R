@@ -9,10 +9,7 @@ test_that(
 				x=i,
 				max=ct,
 				label="Counting...",
-				reportInterval=1,
-				maxWidth=80,
-				includePB=TRUE,
-				progressChar="="
+				includePB=TRUE
 			)
 			Sys.sleep(seconds/ct)
 		}
